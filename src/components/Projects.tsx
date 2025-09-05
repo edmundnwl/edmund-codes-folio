@@ -1,0 +1,174 @@
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Button } from "@/components/ui/button";
+import { Calendar, Users, ExternalLink } from "lucide-react";
+
+const Projects = () => {
+  const projects = [
+    {
+      title: "AI-Powered Cybersecurity Knowledge Discovery Platform",
+      role: "Project Manager & Developer",
+      period: "Aug 2025 – Present",
+      type: "Business Analytics Capstone Project",
+      description: "Leading the development of an innovative knowledge management platform that leverages AI to enhance cybersecurity operations and knowledge discovery.",
+      achievements: [
+        "Collaborated with external industry partner and faculty supervisor to define project objectives and deliverables",
+        "Initiated the product backlog and implemented Scrum practices to enhance team alignment",
+        "Serving as both project coordinator and developer, contributing to design and implementation"
+      ],
+      skills: ["Project Management", "Scrum", "AI/ML", "Knowledge Management", "Team Leadership"],
+      status: "In Progress"
+    },
+    {
+      title: "GIC Trading Platform Enhancement",
+      role: "Frontend Developer",
+      period: "Sep 2024",
+      type: "Hackathon Project",
+      description: "Developed a web application for GIC traders to streamline instrument search and approval processes, significantly improving trading efficiency.",
+      achievements: [
+        "Collaborated with a team of 5 to develop a comprehensive trading platform",
+        "Streamlined search and approval of 4,000 instruments across global markets",
+        "Managed 400 counterparties for faster trade execution",
+        "Designed and implemented a minimalistic, intuitive ReactJS frontend that reduced time-to-execution for trades"
+      ],
+      skills: ["ReactJS", "Frontend Development", "UI/UX Design", "Team Collaboration", "Agile Development"],
+      status: "Completed"
+    }
+  ];
+
+  const leadership = {
+    title: "NUS Computing Club Children Community Service Programmes Head",
+    period: "Jan 2023 - Jun 2023",
+    location: "Singapore",
+    description: "Led educational initiatives to introduce programming concepts to young students, fostering the next generation of tech enthusiasts.",
+    achievement: "Designed and taught a 4-week hands-on Python course for 10 primary school students, using mini-game projects to introduce coding concepts like data structures and functions.",
+    skills: ["Teaching", "Curriculum Design", "Python", "Community Service", "Leadership"]
+  };
+
+  return (
+    <section id="projects" className="py-20 bg-muted/30">
+      <div className="container mx-auto px-6">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl font-bold text-center mb-16 text-primary">
+            Projects & Leadership
+          </h2>
+          
+          <div className="space-y-8">
+            {/* Projects */}
+            {projects.map((project, index) => (
+              <Card key={index} className="shadow-card border-card-border hover:shadow-elevated transition-smooth">
+                <CardHeader className="pb-4">
+                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                    <div className="flex-1">
+                      <div className="flex items-center gap-3 mb-2">
+                        <h3 className="text-xl font-semibold text-primary">
+                          {project.title}
+                        </h3>
+                        <Badge 
+                          variant={project.status === "In Progress" ? "default" : "secondary"}
+                          className={project.status === "In Progress" 
+                            ? "bg-accent text-accent-foreground" 
+                            : "bg-primary-muted text-primary"
+                          }
+                        >
+                          {project.status}
+                        </Badge>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-1">
+                        {project.role} • {project.type}
+                      </p>
+                    </div>
+                    
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <Calendar className="h-4 w-4 mr-1" />
+                      {project.period}
+                    </div>
+                  </div>
+                  
+                  <p className="text-muted-foreground leading-relaxed">
+                    {project.description}
+                  </p>
+                </CardHeader>
+                
+                <CardContent>
+                  <ul className="space-y-2 mb-6">
+                    {project.achievements.map((achievement, achievementIndex) => (
+                      <li key={achievementIndex} className="flex items-start">
+                        <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
+                        <span className="text-muted-foreground text-sm leading-relaxed">
+                          {achievement}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <div className="flex flex-wrap gap-2">
+                    {project.skills.map((skill, skillIndex) => (
+                      <Badge 
+                        key={skillIndex}
+                        variant="outline"
+                        className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth text-xs"
+                      >
+                        {skill}
+                      </Badge>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+            
+            {/* Leadership Experience */}
+            <Card className="shadow-card border-card-border hover:shadow-elevated transition-smooth">
+              <CardHeader className="pb-4">
+                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-xl font-semibold text-primary">
+                        {leadership.title}
+                      </h3>
+                      <Badge variant="secondary" className="bg-accent-light text-accent">
+                        Leadership
+                      </Badge>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center text-sm text-muted-foreground">
+                    <Calendar className="h-4 w-4 mr-1" />
+                    {leadership.period}
+                  </div>
+                </div>
+                
+                <p className="text-muted-foreground leading-relaxed">
+                  {leadership.description}
+                </p>
+              </CardHeader>
+              
+              <CardContent>
+                <div className="flex items-start mb-6">
+                  <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
+                  <span className="text-muted-foreground leading-relaxed">
+                    {leadership.achievement}
+                  </span>
+                </div>
+                
+                <div className="flex flex-wrap gap-2">
+                  {leadership.skills.map((skill, skillIndex) => (
+                    <Badge 
+                      key={skillIndex}
+                      variant="outline"
+                      className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth text-xs"
+                    >
+                      {skill}
+                    </Badge>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Projects;
