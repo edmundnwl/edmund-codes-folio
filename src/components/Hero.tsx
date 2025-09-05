@@ -23,7 +23,7 @@ const Hero = () => {
             
             {/* Content */}
             <div className="lg:w-2/3 text-center lg:text-left">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-2">
                 Edmund Ng
               </h1>
           

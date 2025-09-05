@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Calendar, Users, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Projects = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState<{[key: number]: number}>({});
@@ -20,7 +20,21 @@ const Projects = () => {
         "Serving as both project coordinator and developer, contributing to design and implementation"
       ],
       skills: ["Project Management", "Scrum", "AI/ML", "Knowledge Management", "Team Leadership"],
-      images: ["Project Image 1", "Project Image 2", "Project Image 3"],
+      imageSlides: [
+        [
+          { src: "AI Dashboard Overview", type: "landscape" },
+          { src: "Knowledge Graph Visualization", type: "landscape" }
+        ],
+        [
+          { src: "Mobile Interface", type: "portrait" },
+          { src: "Security Analytics", type: "landscape" },
+          { src: "User Profile", type: "portrait" }
+        ],
+        [
+          { src: "Data Pipeline", type: "portrait" },
+          { src: "AI Training Interface", type: "portrait" }
+        ]
+      ],
       links: [
         { label: "Live Demo", url: "https://example.com/demo" },
         { label: "GitHub", url: "https://github.com/edmund/project" }
@@ -39,24 +53,52 @@ const Projects = () => {
         "Designed and implemented a minimalistic, intuitive ReactJS frontend that reduced time-to-execution for trades"
       ],
       skills: ["ReactJS", "Frontend Development", "UI/UX Design", "Team Collaboration", "Agile Development"],
-      images: ["Trading Platform Screenshot 1", "Trading Platform Screenshot 2"],
+      imageSlides: [
+        [
+          { src: "Trading Dashboard", type: "landscape" },
+          { src: "Instrument Search", type: "landscape" }
+        ],
+        [
+          { src: "Mobile Trading App", type: "portrait" },
+          { src: "Market Overview", type: "landscape" },
+          { src: "User Settings", type: "portrait" }
+        ]
+      ],
       links: [
         { label: "View Project", url: "https://gic-trading.example.com" }
       ]
     }
   ];
 
-  const nextImage = (projectIndex: number, totalImages: number) => {
+  // Auto-scroll functionality
+  useEffect(() => {
+    const intervals: NodeJS.Timeout[] = [];
+    
+    projects.forEach((project, projectIndex) => {
+      if (project.imageSlides && project.imageSlides.length > 1) {
+        const interval = setInterval(() => {
+          nextImage(projectIndex, project.imageSlides.length);
+        }, 4000); // Change slide every 4 seconds
+        intervals.push(interval);
+      }
+    });
+
+    return () => {
+      intervals.forEach(interval => clearInterval(interval));
+    };
+  }, []);
+
+  const nextImage = (projectIndex: number, totalSlides: number) => {
     setCurrentImageIndex(prev => ({
       ...prev,
-      [projectIndex]: ((prev[projectIndex] || 0) + 1) % totalImages
+      [projectIndex]: ((prev[projectIndex] || 0) + 1) % totalSlides
     }));
   };
 
-  const prevImage = (projectIndex: number, totalImages: number) => {
+  const prevImage = (projectIndex: number, totalSlides: number) => {
     setCurrentImageIndex(prev => ({
       ...prev,
-      [projectIndex]: ((prev[projectIndex] || 0) - 1 + totalImages) % totalImages
+      [projectIndex]: ((prev[projectIndex] || 0) - 1 + totalSlides) % totalSlides
     }));
   };
 
@@ -104,30 +146,41 @@ const Projects = () => {
                 </CardHeader>
                 
                 <CardContent>
-                  {project.images && (
+                  {project.imageSlides && (
                     <div className="mb-6">
-                      <div className="relative bg-muted/30 rounded-lg h-48 flex items-center justify-center overflow-hidden">
-                        <span className="text-muted-foreground">
-                          {project.images[currentImageIndex[index] || 0]}
-                        </span>
+                      <div className="relative bg-muted/30 rounded-lg h-64 flex items-center justify-center overflow-hidden p-4">
+                        <div className="flex items-center justify-center gap-2 h-full w-full">
+                          {project.imageSlides[currentImageIndex[index] || 0]?.map((image, imgIdx) => (
+                            <div
+                              key={imgIdx}
+                              className={`
+                                flex items-center justify-center rounded-lg bg-muted/50 text-muted-foreground text-sm
+                                ${image.type === 'portrait' ? 'w-24 h-48' : 'w-48 h-32'}
+                                ${project.imageSlides[currentImageIndex[index] || 0].length > 2 ? 'flex-1' : ''}
+                              `}
+                            >
+                              {image.src}
+                            </div>
+                          ))}
+                        </div>
                         
-                        {project.images.length > 1 && (
+                        {project.imageSlides.length > 1 && (
                           <>
                             <button
-                              onClick={() => prevImage(index, project.images.length)}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth"
+                              onClick={() => prevImage(index, project.imageSlides.length)}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth z-10"
                             >
                               <ChevronLeft className="h-4 w-4" />
                             </button>
                             <button
-                              onClick={() => nextImage(index, project.images.length)}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth"
+                              onClick={() => nextImage(index, project.imageSlides.length)}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth z-10"
                             >
                               <ChevronRight className="h-4 w-4" />
                             </button>
                             
                             <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                              {project.images.map((_, imgIndex) => (
+                              {project.imageSlides.map((_, imgIndex) => (
                                 <div
                                   key={imgIndex}
                                   className={`w-2 h-2 rounded-full transition-smooth ${
