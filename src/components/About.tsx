@@ -34,7 +34,7 @@ const About = () => {
             About Me
           </h2>
           
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
             <div>
               <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 I'm a dedicated Business Analytics student at the National University of Singapore with a passion for leveraging data to drive meaningful business outcomes. My academic journey is complemented by practical experience gained through internships at leading organizations like DBS Bank and Synapxe.
@@ -44,27 +44,9 @@ const About = () => {
                 My expertise spans across data governance, business intelligence, and process automation. I've successfully designed Power BI dashboards that serve 40+ healthcare institutions and automated billing processes that reduced manual effort by 50%.
               </p>
               
-              <p className="text-lg text-muted-foreground mb-8 leading-relaxed">
+              <p className="text-lg text-muted-foreground mb-6 leading-relaxed">
                 Currently, I'm working on an AI-powered cybersecurity knowledge management platform while pursuing my studies. I thrive in collaborative environments and am always eager to tackle complex analytical challenges.
               </p>
-              
-              <div className="grid grid-cols-3 gap-4">
-                {highlights.map((highlight, index) => (
-                  <Card key={index} className="text-center shadow-card border-card-border">
-                    <CardContent className="p-4">
-                      <div className="text-xl font-bold text-primary mb-1">
-                        {highlight.value}
-                      </div>
-                      <div className="text-sm font-medium text-foreground mb-1">
-                        {highlight.title}
-                      </div>
-                      <div className="text-xs text-muted-foreground">
-                        {highlight.description}
-                      </div>
-                    </CardContent>
-                  </Card>
-                ))}
-              </div>
             </div>
             
             <div>
@@ -72,7 +54,7 @@ const About = () => {
                 Technical Skills
               </h3>
               
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-2 mb-8">
                 {skills.map((skill, index) => (
                   <Badge 
                     key={index} 
@@ -81,6 +63,28 @@ const About = () => {
                   >
                     {skill}
                   </Badge>
+                ))}
+              </div>
+              
+              <div className="grid grid-cols-1 gap-4">
+                {highlights.map((highlight, index) => (
+                  <Card key={index} className="shadow-card border-card-border">
+                    <CardContent className="p-4">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <div className="text-xl font-bold text-primary mb-1">
+                            {highlight.value}
+                          </div>
+                          <div className="text-sm font-medium text-foreground">
+                            {highlight.title}
+                          </div>
+                        </div>
+                        <div className="text-xs text-muted-foreground text-right">
+                          {highlight.description}
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             </div>

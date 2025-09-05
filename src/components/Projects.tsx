@@ -1,9 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, ExternalLink } from "lucide-react";
+import { Calendar, Users, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 const Projects = () => {
+  const [currentImageIndex, setCurrentImageIndex] = useState<{[key: number]: number}>({});
+
   const projects = [
     {
       title: "AI-Powered Cybersecurity Knowledge Discovery Platform",
@@ -17,7 +20,11 @@ const Projects = () => {
         "Serving as both project coordinator and developer, contributing to design and implementation"
       ],
       skills: ["Project Management", "Scrum", "AI/ML", "Knowledge Management", "Team Leadership"],
-      status: "In Progress"
+      images: ["Project Image 1", "Project Image 2", "Project Image 3"],
+      links: [
+        { label: "Live Demo", url: "https://example.com/demo" },
+        { label: "GitHub", url: "https://github.com/edmund/project" }
+      ]
     },
     {
       title: "GIC Trading Platform Enhancement",
@@ -32,9 +39,26 @@ const Projects = () => {
         "Designed and implemented a minimalistic, intuitive ReactJS frontend that reduced time-to-execution for trades"
       ],
       skills: ["ReactJS", "Frontend Development", "UI/UX Design", "Team Collaboration", "Agile Development"],
-      status: "Completed"
+      images: ["Trading Platform Screenshot 1", "Trading Platform Screenshot 2"],
+      links: [
+        { label: "View Project", url: "https://gic-trading.example.com" }
+      ]
     }
   ];
+
+  const nextImage = (projectIndex: number, totalImages: number) => {
+    setCurrentImageIndex(prev => ({
+      ...prev,
+      [projectIndex]: ((prev[projectIndex] || 0) + 1) % totalImages
+    }));
+  };
+
+  const prevImage = (projectIndex: number, totalImages: number) => {
+    setCurrentImageIndex(prev => ({
+      ...prev,
+      [projectIndex]: ((prev[projectIndex] || 0) - 1 + totalImages) % totalImages
+    }));
+  };
 
   const leadership = {
     title: "NUS Computing Club Children Community Service Programmes Head",
@@ -60,20 +84,9 @@ const Projects = () => {
                 <CardHeader className="pb-4">
                   <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                     <div className="flex-1">
-                      <div className="flex items-center gap-3 mb-2">
-                        <h3 className="text-xl font-semibold text-primary">
-                          {project.title}
-                        </h3>
-                        <Badge 
-                          variant={project.status === "In Progress" ? "default" : "secondary"}
-                          className={project.status === "In Progress" 
-                            ? "bg-accent text-accent-foreground" 
-                            : "bg-primary-muted text-primary"
-                          }
-                        >
-                          {project.status}
-                        </Badge>
-                      </div>
+                      <h3 className="text-xl font-semibold text-primary mb-2">
+                        {project.title}
+                      </h3>
                       <p className="text-sm text-muted-foreground mb-1">
                         {project.role} • {project.type}
                       </p>
@@ -91,6 +104,46 @@ const Projects = () => {
                 </CardHeader>
                 
                 <CardContent>
+                  {project.images && (
+                    <div className="mb-6">
+                      <div className="relative bg-muted/30 rounded-lg h-48 flex items-center justify-center overflow-hidden">
+                        <span className="text-muted-foreground">
+                          {project.images[currentImageIndex[index] || 0]}
+                        </span>
+                        
+                        {project.images.length > 1 && (
+                          <>
+                            <button
+                              onClick={() => prevImage(index, project.images.length)}
+                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth"
+                            >
+                              <ChevronLeft className="h-4 w-4" />
+                            </button>
+                            <button
+                              onClick={() => nextImage(index, project.images.length)}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth"
+                            >
+                              <ChevronRight className="h-4 w-4" />
+                            </button>
+                            
+                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                              {project.images.map((_, imgIndex) => (
+                                <div
+                                  key={imgIndex}
+                                  className={`w-2 h-2 rounded-full transition-smooth ${
+                                    imgIndex === (currentImageIndex[index] || 0)
+                                      ? "bg-primary"
+                                      : "bg-muted-foreground/50"
+                                  }`}
+                                />
+                              ))}
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  )}
+                  
                   <ul className="space-y-2 mb-6">
                     {project.achievements.map((achievement, achievementIndex) => (
                       <li key={achievementIndex} className="flex items-start">
@@ -102,7 +155,7 @@ const Projects = () => {
                     ))}
                   </ul>
                   
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 mb-4">
                     {project.skills.map((skill, skillIndex) => (
                       <Badge 
                         key={skillIndex}
@@ -113,6 +166,23 @@ const Projects = () => {
                       </Badge>
                     ))}
                   </div>
+                  
+                  {project.links && project.links.length > 0 && (
+                    <div className="flex flex-wrap gap-2">
+                      {project.links.map((link, linkIndex) => (
+                        <Button
+                          key={linkIndex}
+                          variant="outline"
+                          size="sm"
+                          onClick={() => window.open(link.url, "_blank")}
+                          className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
+                        >
+                          <ExternalLink className="h-3 w-3 mr-1" />
+                          {link.label}
+                        </Button>
+                      ))}
+                    </div>
+                  )}
                 </CardContent>
               </Card>
             ))}
@@ -122,14 +192,9 @@ const Projects = () => {
               <CardHeader className="pb-4">
                 <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                   <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-xl font-semibold text-primary">
-                        {leadership.title}
-                      </h3>
-                      <Badge variant="secondary" className="bg-accent-light text-accent">
-                        Leadership
-                      </Badge>
-                    </div>
+                    <h3 className="text-xl font-semibold text-primary mb-2">
+                      {leadership.title}
+                    </h3>
                   </div>
                   
                   <div className="flex items-center text-sm text-muted-foreground">
