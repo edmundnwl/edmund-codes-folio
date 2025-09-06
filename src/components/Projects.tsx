@@ -5,7 +5,7 @@ import { Calendar, Users, ExternalLink, ChevronLeft, ChevronRight } from "lucide
 import { useState, useEffect } from "react";
 
 const Projects = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState<{[key: number]: number}>({});
+  const [currentSlide, setCurrentSlide] = useState<{[key: number]: number}>({});
 
   const projects = [
     {
@@ -20,11 +20,6 @@ const Projects = () => {
         "Serving as both project coordinator and developer, contributing to design and implementation"
       ],
       skills: ["Project Management", "Scrum", "AI/ML", "Knowledge Management", "Team Leadership"],
-      imageSlides: [
-        "Dashboard Overview",
-        "Analytics View", 
-        "Security Reports"
-      ],
       links: [
         { label: "Live Demo", url: "https://example.com/demo" },
         { label: "GitHub", url: "https://github.com/edmund/project" }
@@ -43,31 +38,24 @@ const Projects = () => {
         "Designed and implemented a minimalistic, intuitive ReactJS frontend that reduced time-to-execution for trades"
       ],
       skills: ["ReactJS", "Frontend Development", "UI/UX Design", "Team Collaboration", "Agile Development"],
-      imageSlides: [
-        "Trading Dashboard",
-        "Market Analysis",
-        "User Interface"
-      ],
       links: [
         { label: "View Project", url: "https://gic-trading.example.com" }
       ]
     }
   ];
 
-  // Auto-scroll functionality
+  // Auto-scroll functionality for galleries
   useEffect(() => {
     const intervals: NodeJS.Timeout[] = [];
     
-    projects.forEach((project, projectIndex) => {
-      if (project.imageSlides && project.imageSlides.length > 0) {
-        const interval = setInterval(() => {
-          setCurrentImageIndex(prev => ({
-            ...prev,
-            [projectIndex]: ((prev[projectIndex] || 0) + 1) % 3
-          }));
-        }, 3000); // Change slide every 3 seconds
-        intervals.push(interval);
-      }
+    projects.forEach((_, projectIndex) => {
+      const interval = setInterval(() => {
+        setCurrentSlide(prev => ({
+          ...prev,
+          [projectIndex]: ((prev[projectIndex] || 0) + 1) % 3
+        }));
+      }, 3000);
+      intervals.push(interval);
     });
 
     return () => {
@@ -119,43 +107,43 @@ const Projects = () => {
                 </CardHeader>
                 
                 <CardContent>
-                  {project.imageSlides && (
-                    <div className="mb-6">
-                      <div className="relative bg-muted/30 rounded-lg h-64 overflow-hidden">
-                        <div 
-                          className="flex h-full transition-transform duration-700 ease-in-out"
-                          style={{ 
-                            transform: `translateX(-${(currentImageIndex[index] || 0) * 100}%)`,
-                            width: "300%"
-                          }}
-                        >
-                          {[0, 1, 2].map((slideIdx) => (
-                            <div 
-                              key={slideIdx}
-                              className="flex items-center justify-center h-full p-4 w-1/3"
-                            >
-                              <div className="flex items-center justify-center rounded-lg bg-muted/50 text-muted-foreground text-sm w-48 h-32">
-                                {project.imageSlides[slideIdx] || `Slide ${slideIdx + 1}`}
+                  <div className="mb-6">
+                    <div className="relative bg-muted/30 rounded-lg h-48 overflow-hidden">
+                      <div 
+                        className="flex w-[300%] h-full transition-transform duration-700 ease-in-out"
+                        style={{ transform: `translateX(-${((currentSlide[index] || 0) * 100) / 3}%)` }}
+                      >
+                        {[0, 1, 2].map((slideIdx) => (
+                          <div 
+                            key={slideIdx}
+                            className="w-1/3 h-full flex items-center justify-center gap-3 p-4"
+                          >
+                            {[1, 2, 3].map((imgIdx) => (
+                              <div 
+                                key={imgIdx}
+                                className="flex-1 h-32 bg-muted/50 rounded-lg flex items-center justify-center text-muted-foreground text-xs"
+                              >
+                                Image {slideIdx * 3 + imgIdx}
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                        
-                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                          {[0, 1, 2].map((slideIdx) => (
-                            <div
-                              key={slideIdx}
-                              className={`w-2 h-2 rounded-full transition-smooth ${
-                                slideIdx === (currentImageIndex[index] || 0)
-                                  ? "bg-primary"
-                                  : "bg-muted-foreground/50"
-                              }`}
-                            />
-                          ))}
-                        </div>
+                            ))}
+                          </div>
+                        ))}
+                      </div>
+                      
+                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                        {[0, 1, 2].map((slideIdx) => (
+                          <div
+                            key={slideIdx}
+                            className={`w-2 h-2 rounded-full transition-smooth ${
+                              slideIdx === (currentSlide[index] || 0)
+                                ? "bg-primary"
+                                : "bg-muted-foreground/50"
+                            }`}
+                          />
+                        ))}
                       </div>
                     </div>
-                  )}
+                  </div>
                   
                   <ul className="space-y-2 mb-6">
                     {project.achievements.map((achievement, achievementIndex) => (
