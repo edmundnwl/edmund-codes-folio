@@ -148,18 +148,32 @@ const Projects = () => {
                 <CardContent>
                   {project.imageSlides && (
                     <div className="mb-6">
-                      <div className="relative bg-muted/30 rounded-lg h-64 flex items-center justify-center overflow-hidden p-4">
-                        <div className="flex items-center justify-center gap-2 h-full w-full">
-                          {project.imageSlides[currentImageIndex[index] || 0]?.map((image, imgIdx) => (
-                            <div
-                              key={imgIdx}
-                              className={`
-                                flex items-center justify-center rounded-lg bg-muted/50 text-muted-foreground text-sm
-                                ${image.type === 'portrait' ? 'w-24 h-48' : 'w-48 h-32'}
-                                ${project.imageSlides[currentImageIndex[index] || 0].length > 2 ? 'flex-1' : ''}
-                              `}
+                      <div className="relative bg-muted/30 rounded-lg h-64 overflow-hidden">
+                        <div 
+                          className="flex h-full transition-transform duration-500 ease-in-out"
+                          style={{ 
+                            transform: `translateX(-${(currentImageIndex[index] || 0) * 100}%)`,
+                            width: `${project.imageSlides.length * 100}%`
+                          }}
+                        >
+                          {project.imageSlides.map((slideImages, slideIdx) => (
+                            <div 
+                              key={slideIdx}
+                              className="flex items-center justify-center gap-2 h-full p-4"
+                              style={{ width: `${100 / project.imageSlides.length}%` }}
                             >
-                              {image.src}
+                              {slideImages.map((image, imgIdx) => (
+                                <div
+                                  key={imgIdx}
+                                  className={`
+                                    flex items-center justify-center rounded-lg bg-muted/50 text-muted-foreground text-sm
+                                    ${image.type === 'portrait' ? 'w-24 h-48' : 'w-48 h-32'}
+                                    ${slideImages.length > 2 ? 'flex-1' : ''}
+                                  `}
+                                >
+                                  {image.src}
+                                </div>
+                              ))}
                             </div>
                           ))}
                         </div>

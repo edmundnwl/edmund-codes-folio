@@ -8,23 +8,6 @@ const About = () => {
     "Data Analytics", "Business Intelligence", "Process Optimization"
   ];
 
-  const highlights = [
-    {
-      title: "GPA Excellence",
-      value: "4.82/5.0",
-      description: "Dean's List AY23/24 Semester 1 & 2"
-    },
-    {
-      title: "Industry Experience",
-      value: "2 Internships",
-      description: "DBS Bank & Synapxe Singapore"
-    },
-    {
-      title: "Academic Recognition",
-      value: "Top Student",
-      description: "CS1010S Programming Methodology"
-    }
-  ];
 
   return (
     <section id="about" className="py-20 bg-muted/30">
@@ -49,12 +32,12 @@ const About = () => {
               </p>
             </div>
             
-            <div>
+            <div className="flex flex-col items-center">
               <h3 className="text-2xl font-semibold mb-6 text-primary">
                 Technical Skills
               </h3>
               
-              <div className="flex flex-wrap gap-2 mb-8">
+              <div className="flex flex-wrap gap-2 justify-center">
                 {skills.map((skill, index) => (
                   <Badge 
                     key={index} 
@@ -63,28 +46,6 @@ const About = () => {
                   >
                     {skill}
                   </Badge>
-                ))}
-              </div>
-              
-              <div className="grid grid-cols-1 gap-4">
-                {highlights.map((highlight, index) => (
-                  <Card key={index} className="shadow-card border-card-border">
-                    <CardContent className="p-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className="text-xl font-bold text-primary mb-1">
-                            {highlight.value}
-                          </div>
-                          <div className="text-sm font-medium text-foreground">
-                            {highlight.title}
-                          </div>
-                        </div>
-                        <div className="text-xs text-muted-foreground text-right">
-                          {highlight.description}
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
                 ))}
               </div>
             </div>
