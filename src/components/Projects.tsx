@@ -21,19 +21,9 @@ const Projects = () => {
       ],
       skills: ["Project Management", "Scrum", "AI/ML", "Knowledge Management", "Team Leadership"],
       imageSlides: [
-        [
-          { src: "AI Dashboard Overview", type: "landscape" },
-          { src: "Knowledge Graph Visualization", type: "landscape" }
-        ],
-        [
-          { src: "Mobile Interface", type: "portrait" },
-          { src: "Security Analytics", type: "landscape" },
-          { src: "User Profile", type: "portrait" }
-        ],
-        [
-          { src: "Data Pipeline", type: "portrait" },
-          { src: "AI Training Interface", type: "portrait" }
-        ]
+        "Dashboard Overview",
+        "Analytics View", 
+        "Security Reports"
       ],
       links: [
         { label: "Live Demo", url: "https://example.com/demo" },
@@ -54,15 +44,9 @@ const Projects = () => {
       ],
       skills: ["ReactJS", "Frontend Development", "UI/UX Design", "Team Collaboration", "Agile Development"],
       imageSlides: [
-        [
-          { src: "Trading Dashboard", type: "landscape" },
-          { src: "Instrument Search", type: "landscape" }
-        ],
-        [
-          { src: "Mobile Trading App", type: "portrait" },
-          { src: "Market Overview", type: "landscape" },
-          { src: "User Settings", type: "portrait" }
-        ]
+        "Trading Dashboard",
+        "Market Analysis",
+        "User Interface"
       ],
       links: [
         { label: "View Project", url: "https://gic-trading.example.com" }
@@ -75,10 +59,13 @@ const Projects = () => {
     const intervals: NodeJS.Timeout[] = [];
     
     projects.forEach((project, projectIndex) => {
-      if (project.imageSlides && project.imageSlides.length > 1) {
+      if (project.imageSlides && project.imageSlides.length > 0) {
         const interval = setInterval(() => {
-          nextImage(projectIndex, project.imageSlides.length);
-        }, 4000); // Change slide every 4 seconds
+          setCurrentImageIndex(prev => ({
+            ...prev,
+            [projectIndex]: ((prev[projectIndex] || 0) + 1) % 3
+          }));
+        }, 3000); // Change slide every 3 seconds
         intervals.push(interval);
       }
     });
@@ -87,20 +74,6 @@ const Projects = () => {
       intervals.forEach(interval => clearInterval(interval));
     };
   }, []);
-
-  const nextImage = (projectIndex: number, totalSlides: number) => {
-    setCurrentImageIndex(prev => ({
-      ...prev,
-      [projectIndex]: ((prev[projectIndex] || 0) + 1) % totalSlides
-    }));
-  };
-
-  const prevImage = (projectIndex: number, totalSlides: number) => {
-    setCurrentImageIndex(prev => ({
-      ...prev,
-      [projectIndex]: ((prev[projectIndex] || 0) - 1 + totalSlides) % totalSlides
-    }));
-  };
 
   const leadership = {
     title: "NUS Computing Club Children Community Service Programmes Head",
@@ -150,63 +123,36 @@ const Projects = () => {
                     <div className="mb-6">
                       <div className="relative bg-muted/30 rounded-lg h-64 overflow-hidden">
                         <div 
-                          className="flex h-full transition-transform duration-500 ease-in-out"
+                          className="flex h-full transition-transform duration-700 ease-in-out"
                           style={{ 
                             transform: `translateX(-${(currentImageIndex[index] || 0) * 100}%)`,
-                            width: `${project.imageSlides.length * 100}%`
+                            width: "300%"
                           }}
                         >
-                          {project.imageSlides.map((slideImages, slideIdx) => (
+                          {[0, 1, 2].map((slideIdx) => (
                             <div 
                               key={slideIdx}
-                              className="flex items-center justify-center gap-2 h-full p-4"
-                              style={{ width: `${100 / project.imageSlides.length}%` }}
+                              className="flex items-center justify-center h-full p-4 w-1/3"
                             >
-                              {slideImages.map((image, imgIdx) => (
-                                <div
-                                  key={imgIdx}
-                                  className={`
-                                    flex items-center justify-center rounded-lg bg-muted/50 text-muted-foreground text-sm
-                                    ${image.type === 'portrait' ? 'w-24 h-48' : 'w-48 h-32'}
-                                    ${slideImages.length > 2 ? 'flex-1' : ''}
-                                  `}
-                                >
-                                  {image.src}
-                                </div>
-                              ))}
+                              <div className="flex items-center justify-center rounded-lg bg-muted/50 text-muted-foreground text-sm w-48 h-32">
+                                {project.imageSlides[slideIdx] || `Slide ${slideIdx + 1}`}
+                              </div>
                             </div>
                           ))}
                         </div>
                         
-                        {project.imageSlides.length > 1 && (
-                          <>
-                            <button
-                              onClick={() => prevImage(index, project.imageSlides.length)}
-                              className="absolute left-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth z-10"
-                            >
-                              <ChevronLeft className="h-4 w-4" />
-                            </button>
-                            <button
-                              onClick={() => nextImage(index, project.imageSlides.length)}
-                              className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-background/80 hover:bg-background transition-smooth z-10"
-                            >
-                              <ChevronRight className="h-4 w-4" />
-                            </button>
-                            
-                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                              {project.imageSlides.map((_, imgIndex) => (
-                                <div
-                                  key={imgIndex}
-                                  className={`w-2 h-2 rounded-full transition-smooth ${
-                                    imgIndex === (currentImageIndex[index] || 0)
-                                      ? "bg-primary"
-                                      : "bg-muted-foreground/50"
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                          </>
-                        )}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
+                          {[0, 1, 2].map((slideIdx) => (
+                            <div
+                              key={slideIdx}
+                              className={`w-2 h-2 rounded-full transition-smooth ${
+                                slideIdx === (currentImageIndex[index] || 0)
+                                  ? "bg-primary"
+                                  : "bg-muted-foreground/50"
+                              }`}
+                            />
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}
