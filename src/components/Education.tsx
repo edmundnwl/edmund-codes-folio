@@ -111,7 +111,7 @@ const Education = () => {
                         <Badge 
                           key={courseIndex}
                           variant="outline"
-                          className="border-primary-light text-primary hover:bg-primary-light hover:text-primary-foreground transition-smooth text-xs"
+                          className="border-primary-light text-primary text-xs"
                         >
                           {course}
                         </Badge>

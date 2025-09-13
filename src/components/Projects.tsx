@@ -1,9 +1,12 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, ExternalLink } from "lucide-react";
+import { Calendar, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 
 const Projects = () => {
+  const [currentProject, setCurrentProject] = useState(0);
+  
   const projects = [
     {
       title: "AI-Powered Cybersecurity Knowledge Discovery Platform",
@@ -43,12 +46,27 @@ const Projects = () => {
 
   const leadership = {
     title: "NUS Computing Club Children Community Service Programmes Head",
+    role: "Community Leader",
+    type: "Leadership Experience",
     period: "Jan 2023 - Jun 2023",
-    location: "Singapore",
     description: "Led educational initiatives to introduce programming concepts to young students, fostering the next generation of tech enthusiasts.",
-    achievement: "Designed and taught a 4-week hands-on Python course for 10 primary school students, using mini-game projects to introduce coding concepts like data structures and functions.",
-    skills: ["Teaching", "Curriculum Design", "Python", "Community Service", "Leadership"]
+    achievements: [
+      "Designed and taught a 4-week hands-on Python course for 10 primary school students, using mini-game projects to introduce coding concepts like data structures and functions."
+    ],
+    skills: ["Teaching", "Curriculum Design", "Python", "Community Service", "Leadership"],
+    links: [] // No external links for leadership experience
   };
+  
+  const nextProject = () => {
+    setCurrentProject((prev) => (prev + 1) % (projects.length + 1)); // +1 for leadership
+  };
+  
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + projects.length + 1) % (projects.length + 1));
+  };
+  
+  const allItems = [...projects, leadership];
+  const currentItem = allItems[currentProject];
 
   return (
     <section id="projects" className="py-20 bg-muted/30">
@@ -58,118 +76,129 @@ const Projects = () => {
             Projects & Leadership
           </h2>
           
-          <div className="space-y-8">
-            {/* Projects */}
-            {projects.map((project, index) => (
-              <Card key={index} className="shadow-card border-card-border hover:shadow-elevated transition-smooth">
-                <CardHeader className="pb-4">
-                  <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                    <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-primary mb-2">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground mb-1">
-                        {project.role} • {project.type}
-                      </p>
-                    </div>
-                    
-                    <div className="flex items-center text-sm text-muted-foreground">
-                      <Calendar className="h-4 w-4 mr-1" />
-                      {project.period}
-                    </div>
-                  </div>
-                  
-                  <p className="text-muted-foreground leading-relaxed">
-                    {project.description}
-                  </p>
-                </CardHeader>
-                
-                <CardContent>
-                  <ul className="space-y-2 mb-6">
-                    {project.achievements.map((achievement, achievementIndex) => (
-                      <li key={achievementIndex} className="flex items-start">
-                        <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
-                        <span className="text-muted-foreground text-sm leading-relaxed">
-                          {achievement}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.skills.map((skill, skillIndex) => (
-                      <Badge 
-                        key={skillIndex}
-                        variant="outline"
-                        className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth text-xs"
-                      >
-                        {skill}
-                      </Badge>
-                    ))}
-                  </div>
-                  
-                  {project.links && project.links.length > 0 && (
-                    <div className="flex flex-wrap gap-2">
-                      {project.links.map((link, linkIndex) => (
-                        <Button
-                          key={linkIndex}
-                          variant="outline"
-                          size="sm"
-                          onClick={() => window.open(link.url, "_blank")}
-                          className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
-                        >
-                          <ExternalLink className="h-3 w-3 mr-1" />
-                          {link.label}
-                        </Button>
-                      ))}
-                    </div>
-                  )}
-                </CardContent>
-              </Card>
-            ))}
+          {/* Carousel Container */}
+          <div className="relative">
+            {/* Navigation Arrows */}
+            <Button
+              variant="outline"
+              size="icon"
+              className={`absolute left-4 top-1/2 transform -translate-y-1/2 z-10 ${
+                currentProject === 0 ? 'opacity-30 cursor-not-allowed' : 'opacity-100'
+              }`}
+              onClick={prevProject}
+              disabled={currentProject === 0}
+            >
+              <ChevronLeft className="h-4 w-4" />
+            </Button>
             
-            {/* Leadership Experience */}
-            <Card className="shadow-card border-card-border hover:shadow-elevated transition-smooth">
-              <CardHeader className="pb-4">
-                <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-semibold text-primary mb-2">
-                      {leadership.title}
-                    </h3>
+            <Button
+              variant="outline"
+              size="icon"
+              className={`absolute right-4 top-1/2 transform -translate-y-1/2 z-10 ${
+                currentProject === allItems.length - 1 ? 'opacity-30 cursor-not-allowed' : 'opacity-100'
+              }`}
+              onClick={nextProject}
+              disabled={currentProject === allItems.length - 1}
+            >
+              <ChevronRight className="h-4 w-4" />
+            </Button>
+            
+            {/* Card */}
+            <div className="mx-16 overflow-hidden">
+              <div 
+                className="flex transition-transform duration-500 ease-in-out"
+                style={{ transform: `translateX(-${currentProject * 100}%)` }}
+              >
+                {allItems.map((item, index) => (
+                  <div key={index} className="w-full flex-shrink-0">
+                    <Card className="shadow-card border-card-border">
+                      <CardHeader className="pb-4">
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                          <div className="flex-1">
+                            <h3 className="text-xl font-semibold text-primary mb-2">
+                              {item.title}
+                            </h3>
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
+                              <span className="text-sm text-muted-foreground">
+                                {item.role} • {item.type}
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center text-sm text-muted-foreground">
+                            <Calendar className="h-4 w-4 mr-1" />
+                            {item.period}
+                          </div>
+                        </div>
+                        
+                        <p className="text-muted-foreground leading-relaxed">
+                          {item.description}
+                        </p>
+                      </CardHeader>
+                      
+                      <CardContent>
+                        {item.achievements && (
+                          <ul className="space-y-2 mb-6">
+                            {item.achievements.map((achievement, achievementIndex) => (
+                              <li key={achievementIndex} className="flex items-start">
+                                <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
+                                <span className="text-muted-foreground text-sm leading-relaxed">
+                                  {achievement}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                        
+                        <div className="flex flex-wrap gap-2 mb-4">
+                          {item.skills.map((skill, skillIndex) => (
+                            <Badge 
+                              key={skillIndex}
+                              variant="outline"
+                              className="border-primary text-primary text-xs"
+                            >
+                              {skill}
+                            </Badge>
+                          ))}
+                        </div>
+                        
+                        {item.links && item.links.length > 0 && (
+                          <div className="flex flex-wrap gap-2">
+                            {item.links.map((link, linkIndex) => (
+                              <Button
+                                key={linkIndex}
+                                variant="outline"
+                                size="sm"
+                                onClick={() => window.open(link.url, "_blank")}
+                                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
+                              >
+                                <ExternalLink className="h-3 w-3 mr-1" />
+                                {link.label}
+                              </Button>
+                            ))}
+                          </div>
+                        )}
+                      </CardContent>
+                    </Card>
                   </div>
-                  
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <Calendar className="h-4 w-4 mr-1" />
-                    {leadership.period}
-                  </div>
-                </div>
-                
-                <p className="text-muted-foreground leading-relaxed">
-                  {leadership.description}
-                </p>
-              </CardHeader>
-              
-              <CardContent>
-                <div className="flex items-start mb-6">
-                  <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
-                  <span className="text-muted-foreground leading-relaxed">
-                    {leadership.achievement}
-                  </span>
-                </div>
-                
-                <div className="flex flex-wrap gap-2">
-                  {leadership.skills.map((skill, skillIndex) => (
-                    <Badge 
-                      key={skillIndex}
-                      variant="outline"
-                      className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth text-xs"
-                    >
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+                ))}
+              </div>
+            </div>
+            
+            {/* Dots Indicator */}
+            <div className="flex justify-center mt-6 space-x-2">
+              {allItems.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentProject(index)}
+                  className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                    index === currentProject
+                      ? 'bg-primary scale-110'
+                      : 'bg-muted-foreground/30 hover:bg-muted-foreground/50'
+                  }`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>

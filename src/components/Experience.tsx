@@ -83,7 +83,7 @@ const Experience = () => {
                       <Badge 
                         key={skillIndex}
                         variant="outline"
-                        className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
+                        className="border-accent text-accent"
                       >
                         {skill}
                       </Badge>
