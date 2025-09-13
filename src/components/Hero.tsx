@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { ArrowDown, Mail, Linkedin, Download } from "lucide-react";
 
 const Hero = () => {
@@ -31,9 +32,21 @@ const Hero = () => {
                 Business Analytics Student & Data Professional
               </p>
               
-              <p className="text-lg text-muted-foreground mb-8 max-w-2xl leading-relaxed">
+              <p className="text-lg text-muted-foreground mb-6 max-w-2xl leading-relaxed">
                 Passionate about transforming data into actionable insights. Currently pursuing Business Analytics at NUS with hands-on experience in data governance, business intelligence, and process optimization.
               </p>
+              
+              <div className="flex flex-wrap gap-2 mb-8 lg:justify-start justify-center">
+                {["Python", "VBA", "SQL", "Power BI", "Data Analytics", "Data Governance"].map((skill, index) => (
+                  <Badge 
+                    key={index} 
+                    variant="secondary"
+                    className="bg-primary-muted text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
+                  >
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
               
               <div className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-4 mb-8">
             <Button 
@@ -57,10 +70,10 @@ const Hero = () => {
           </div>
           
               <button
-                onClick={() => scrollToSection("about")}
+                onClick={() => scrollToSection("experience")}
                 className="inline-flex items-center text-muted-foreground hover:text-primary transition-smooth group"
               >
-                <span className="mr-2">Learn more about me</span>
+                <span className="mr-2">View my experience</span>
                 <ArrowDown className="h-4 w-4 group-hover:translate-y-1 transition-smooth" />
               </button>
             </div>

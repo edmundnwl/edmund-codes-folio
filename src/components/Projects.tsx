@@ -1,12 +1,9 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, Users, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
-import { useState, useEffect } from "react";
+import { Calendar, Users, ExternalLink } from "lucide-react";
 
 const Projects = () => {
-  const [currentSlide, setCurrentSlide] = useState<{[key: number]: number}>({});
-
   const projects = [
     {
       title: "AI-Powered Cybersecurity Knowledge Discovery Platform",
@@ -43,25 +40,6 @@ const Projects = () => {
       ]
     }
   ];
-
-  // Auto-scroll functionality for galleries
-  useEffect(() => {
-    const intervals: NodeJS.Timeout[] = [];
-    
-    projects.forEach((_, projectIndex) => {
-      const interval = setInterval(() => {
-        setCurrentSlide(prev => ({
-          ...prev,
-          [projectIndex]: ((prev[projectIndex] || 0) + 1) % 3
-        }));
-      }, 3000);
-      intervals.push(interval);
-    });
-
-    return () => {
-      intervals.forEach(interval => clearInterval(interval));
-    };
-  }, []);
 
   const leadership = {
     title: "NUS Computing Club Children Community Service Programmes Head",
@@ -107,44 +85,6 @@ const Projects = () => {
                 </CardHeader>
                 
                 <CardContent>
-                  <div className="mb-6">
-                    <div className="relative bg-muted/30 rounded-lg h-48 overflow-hidden">
-                      <div 
-                        className="flex w-[300%] h-full transition-transform duration-700 ease-in-out"
-                        style={{ transform: `translateX(-${((currentSlide[index] || 0) * 100) / 3}%)` }}
-                      >
-                        {[0, 1, 2].map((slideIdx) => (
-                          <div 
-                            key={slideIdx}
-                            className="w-1/3 h-full flex items-center justify-center gap-3 p-4"
-                          >
-                            {[1, 2, 3].map((imgIdx) => (
-                              <div 
-                                key={imgIdx}
-                                className="flex-1 h-32 bg-muted/50 rounded-lg flex items-center justify-center text-muted-foreground text-xs"
-                              >
-                                Image {slideIdx * 3 + imgIdx}
-                              </div>
-                            ))}
-                          </div>
-                        ))}
-                      </div>
-                      
-                      <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1">
-                        {[0, 1, 2].map((slideIdx) => (
-                          <div
-                            key={slideIdx}
-                            className={`w-2 h-2 rounded-full transition-smooth ${
-                              slideIdx === (currentSlide[index] || 0)
-                                ? "bg-primary"
-                                : "bg-muted-foreground/50"
-                            }`}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  
                   <ul className="space-y-2 mb-6">
                     {project.achievements.map((achievement, achievementIndex) => (
                       <li key={achievementIndex} className="flex items-start">
