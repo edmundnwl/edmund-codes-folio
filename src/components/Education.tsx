@@ -18,7 +18,7 @@ const Education = () => {
         "Object Oriented Programming",
         "Data Management and Visualisation", 
         "Data Structures and Algorithms",
-        "Econometrics",
+        "Data Engineering",
         "Probability and Statistics",
         "Discrete Structures",
         "Feature Engineering for Machine Learning"

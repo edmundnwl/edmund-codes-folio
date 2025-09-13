@@ -24,24 +24,20 @@ const Hero = () => {
             
             {/* Content */}
             <div className="lg:w-2/3 text-center lg:text-left">
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-2">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-2 lg:text-left text-center">
                 Edmund Ng
               </h1>
           
-              <p className="text-xl md:text-2xl text-muted-foreground mb-4">
-                Business Analytics Student & Data Professional
-              </p>
-              
-              <p className="text-lg text-muted-foreground mb-6 max-w-2xl leading-relaxed">
-                Passionate about transforming data into actionable insights. Currently pursuing Business Analytics at NUS with hands-on experience in data governance, business intelligence, and process optimization.
+              <p className="text-xl md:text-2xl text-muted-foreground mb-6">
+                Hi, I'm a Business Analyst!
               </p>
               
               <div className="flex flex-wrap gap-2 mb-8 lg:justify-start justify-center">
-                {["Python", "VBA", "SQL", "Power BI", "Data Analytics", "Data Governance"].map((skill, index) => (
+                {["Python", "VBA", "SQL", "Power BI", "Data Governance"].map((skill, index) => (
                   <Badge 
                     key={index} 
                     variant="secondary"
-                    className="bg-primary-muted text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
+                    className="bg-primary-muted text-primary"
                   >
                     {skill}
                   </Badge>

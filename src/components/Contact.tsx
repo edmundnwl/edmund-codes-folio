@@ -9,14 +9,7 @@ const Contact = () => {
       label: "Email",
       value: "nwledmund@gmail.com",
       action: () => window.open("mailto:nwledmund@gmail.com"),
-      color: "text-accent"
-    },
-    {
-      icon: Phone,
-      label: "Phone",
-      value: "+65 8861 4093",
-      action: () => window.open("tel:+6588614093"),
-      color: "text-primary"
+      color: "text-muted-foreground"
     },
     {
       icon: Linkedin,
@@ -42,12 +35,7 @@ const Contact = () => {
             Let's Connect
           </h2>
           
-          <p className="text-xl text-muted-foreground mb-12 max-w-2xl mx-auto">
-            I'm always interested in discussing new opportunities, collaborations, 
-            or just having a conversation about data analytics and technology.
-          </p>
-          
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             {contactInfo.map((contact, index) => {
               const IconComponent = contact.icon;
               return (
@@ -76,26 +64,6 @@ const Contact = () => {
             })}
           </div>
           
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button 
-              onClick={() => window.open("mailto:nwledmund@gmail.com")}
-              size="lg"
-              className="gradient-primary text-primary-foreground hover:opacity-90 transition-smooth shadow-elevated"
-            >
-              <Mail className="mr-2 h-5 w-5" />
-              Send Email
-            </Button>
-            
-            <Button 
-              variant="outline"
-              size="lg"
-              className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
-              onClick={() => window.open("https://linkedin.com/in/ngwledmund", "_blank")}
-            >
-              <Linkedin className="mr-2 h-5 w-5" />
-              Connect on LinkedIn
-            </Button>
-          </div>
         </div>
       </div>
     </section>
