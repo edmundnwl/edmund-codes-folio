@@ -9,37 +9,68 @@ const Projects = () => {
   
   const projects = [
     {
-      title: "AI-Powered Cybersecurity Knowledge Discovery Platform",
-      role: "Project Manager & Developer",
-      period: "Aug 2025 – Present",
-      type: "Business Analytics Capstone Project",
-      description: "Leading the development of an innovative knowledge management platform that leverages AI to enhance cybersecurity operations and knowledge discovery.",
-      achievements: [
-        "Collaborated with external industry partner and faculty supervisor to define project objectives and deliverables",
-        "Initiated the product backlog and implemented Scrum practices to enhance team alignment",
-        "Serving as both project coordinator and developer, contributing to design and implementation"
-      ],
-      skills: ["Project Management", "Scrum", "AI/ML", "Knowledge Management", "Team Leadership"],
-      links: [
-        { label: "Live Demo", url: "https://example.com/demo" },
-        { label: "GitHub", url: "https://github.com/edmund/project" }
-      ]
-    },
-    {
       title: "GIC Trading Platform Enhancement",
       role: "Frontend Developer",
       period: "Sep 2024",
       type: "Hackathon Project",
-      description: "Developed a web application for GIC traders to streamline instrument search and approval processes, significantly improving trading efficiency.",
+      description: "Web application for GIC traders to streamline instrument search and approval processes, significantly improving trading efficiency.",
       achievements: [
         "Collaborated with a team of 5 to develop a comprehensive trading platform",
         "Streamlined search and approval of 4,000 instruments across global markets",
         "Managed 400 counterparties for faster trade execution",
         "Designed and implemented a minimalistic, intuitive ReactJS frontend that reduced time-to-execution for trades"
       ],
-      skills: ["ReactJS", "Frontend Development", "UI/UX Design", "Team Collaboration", "Agile Development"],
+      skills: ["ReactJS", "Frontend Development"],
+      // links: [
+      //   { label: "View Project", url: "https://gic-trading.example.com" }
+      // ]
+    },
+    {
+      title: "WeFriends – Mental Wellness Web App",
+      role: "Project Manager & Developer",
+      period: "Mar 2024 – May 2024",
+      type: "Application Systems Development for Business Analytics",
+      description: "Mental wellness web application to improve access to mental health resources.",
+      achievements: [
+        "Partnered with a team of 5 using Scrum methodology",
+        "Developed a VueJS frontend with Firebase backend"
+      ],
+      skills: ["VueJS", "Frontend Development", "UI/UX Design", "Firebase", "Scrum"],
       links: [
-        { label: "View Project", url: "https://gic-trading.example.com" }
+        { label: "Live Demo", url: "https://wefriends-d7032.web.app/" },
+        { label: "GitHub", url: "https://github.com/edmundnwl/WeFriends" }
+      ]
+    },
+    {
+      title: "RaveNUS",
+      role: "Frontend Developer",
+      period: "May 2023 – Jul 2023",
+      type: "NUS Orbital",
+      description: "Food recommendation web app for NUS students providing personalized recommendations based on location, timetable uploads, and user reviews.",
+      achievements: [
+        "Spearheaded integration of the ReactJS frontend with Firebase backend to enable seamless data flow and user personalization",
+        "Implemented user review features and timetable-based matching to enhance recommendation relevance",
+        "Deployed the application to production, ensuring stability and scalability for a student user base"
+      ],
+      skills: ["ReactJS", "Firebase", "Figma", "Frontend Development", "UI/UX Design"],
+      links: [
+        { label: "Live Demo", url: "https://ravenus.vercel.app/" },
+        { label: "Github", url: "https://github.com/edmundnwl/RaveNUS" }
+      ]
+    },
+    {
+      title: "LifeHack 2023 – Offun",
+      role: "Developer",
+      period: "May 2023",
+      type: "Hackathon Project",
+      description: "Social platform for the office.",
+      achievements: [
+        "Winner of Best Plot Twist Award for enhancing awareness of phishing risks through a scam advertisement feature, temporarily disabling users' accounts upon interaction.",
+        "Worked in a team of 4 to develop a company-specific social networking platform using Python Flask and SQLite, allowing employees to connect and interact within a secure environment."
+      ],
+      skills: ["Python"],
+      links: [
+        { label: "Github", url: "https://github.com/edmundnwl/LifeHack-2023" }
       ]
     }
   ];
@@ -54,7 +85,9 @@ const Projects = () => {
       "Designed and taught a 4-week hands-on Python course for 10 primary school students, using mini-game projects to introduce coding concepts like data structures and functions."
     ],
     skills: ["Teaching", "Curriculum Design", "Python", "Community Service", "Leadership"],
-    links: [] // No external links for leadership experience
+    links: [
+        { label: "GitHub", url: "https://github.com/edmundnwl/codecamp23" }
+      ]
   };
   
   const nextProject = () => {
@@ -111,7 +144,7 @@ const Projects = () => {
               >
                 {allItems.map((item, index) => (
                   <div key={index} className="w-full flex-shrink-0">
-                    <Card className="shadow-card border-card-border h-[600px] flex flex-col">
+                    <Card className="shadow-card border-card-border min-h-[400px] flex flex-col">
                       <CardHeader className="pb-4">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                           <div className="flex-1">
@@ -143,7 +176,7 @@ const Projects = () => {
                               {item.achievements.map((achievement, achievementIndex) => (
                                 <li key={achievementIndex} className="flex items-start">
                                   <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
-                                  <span className="text-muted-foreground text-sm leading-relaxed">
+                                  <span className="text-muted-foreground text-sm leading-relaxed text-justify">
                                     {achievement}
                                   </span>
                                 </li>
