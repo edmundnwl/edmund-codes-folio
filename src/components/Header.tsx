@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X } from "lucide-react";
+import EdmundLogo from '/public/EdmundLogo.png';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -39,11 +40,22 @@ const Header = () => {
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <button
+          {/* <button
             onClick={() => scrollToSection("hero")}
             className="text-xl font-semibold text-primary transition-smooth hover:text-primary-light"
           >
             Edmund Ng
+          </button> */}
+          <button
+            onClick={() => scrollToSection("hero")}
+            className="transition-smooth focus:outline-none"
+            aria-label="Go to top"
+          >
+            <img
+              src={EdmundLogo}
+              alt="Logo"
+              className="h-8 w-8 object-contain"
+            />
           </button>
 
           {/* Desktop Navigation */}
