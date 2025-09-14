@@ -25,19 +25,24 @@ const Hero = () => {
           <div className="w-full">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
               {/* Profile Image */}
-              <div className={`lg:w-1/3 flex justify-center transition-all duration-1000 ease-out ${
+              <div className={`flex justify-center transition-all duration-1000 ease-out ${
                 animationStage >= 1 ? 'lg:justify-start' : 'justify-center'
               }`}>
-                <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full bg-muted/50 flex items-center justify-center shadow-elevated">
-                  <span className="text-muted-foreground text-lg">Profile Image</span>
+                <div className="w-64 h-64 lg:w-80 lg:h-80 rounded-full bg-muted/50 flex items-center justify-center shadow-elevated overflow-hidden">
+                  {/* <span className="text-muted-foreground text-lg">Profile Image</span> */}
+                  <img
+                    src="/PFP.jpg"
+                    alt="Edmund Ng"
+                    className="object-cover w-full h-full"
+                  />
                 </div>
               </div>
               
               {/* Content */}
-              <div className={`lg:w-2/3 text-center lg:text-left transition-all duration-1000 ease-out ${
+              <div className={`flex flex-col items-start text-left transition-all duration-1000 ease-out ${
                 animationStage >= 1 ? 'translate-x-0 opacity-100' : 'translate-x-8 opacity-0'
               }`}>
-                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-2 lg:text-left text-center">
+                <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent leading-tight pb-2 lg:text-left">
                   Edmund Ng
                 </h1>
             
@@ -50,7 +55,7 @@ const Hero = () => {
                     <Badge 
                       key={index} 
                       variant="secondary"
-                      className="bg-primary-muted text-primary"
+                      className="bg-primary-muted text-primary hover:bg-primary-muted"
                     >
                       {skill}
                     </Badge>

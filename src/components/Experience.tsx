@@ -28,6 +28,17 @@ const Experience = () => {
         "Automated a portion of the monthly billing process using VBA in Excel, reducing manual effort by 50% and streamlining operations for the team."
       ],
       skills: ["Power BI", "Data Visualization", "Process Automation", "VBA", "Healthcare Analytics"]
+    },
+    {
+      title: "Undergraduate Teaching Assistant",
+      company: "National University of Singapore",
+      location: "Singapore", 
+      period: "Aug 2023 - May 2024",
+      achievements: [
+        "CS2040: Data Structures and Algorithms (Jan 2024 - May 2024); Attained student feedback rating of 4.6/5; Conducted weekly lab sessions for a class of 24 students on fundamental data structures and key algorithms, resulting in improved comprehension and practical implementation of these concepts.",
+        "BT2102: Data Management and Visualization (Aug 2023 - Dec 2023); Facilitated weekly tutorials for 10 students covering ER modelling, data querying with MySQL, and data visualization using Tableau, helping students build practical skills in database management and data-driven storytelling."
+      ],
+      skills: ["ER Modeling", "Tableau", "MySQL", "Java", "Data Structures", "Algorithms", "Data Visualization", "Teaching"]
     }
   ];
 
@@ -71,7 +82,7 @@ const Experience = () => {
                     {exp.achievements.map((achievement, achievementIndex) => (
                       <li key={achievementIndex} className="flex items-start">
                         <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
-                        <span className="text-muted-foreground leading-relaxed">
+                        <span className="text-muted-foreground leading-relaxed text-justify">
                           {achievement}
                         </span>
                       </li>
