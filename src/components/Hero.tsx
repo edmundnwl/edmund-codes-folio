@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowDown, Mail, Linkedin, Download } from "lucide-react";
+import { ArrowDown, Mail, Linkedin, Github } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const Hero = () => {
@@ -29,7 +29,8 @@ const Hero = () => {
   
   // Typing animation for name
   useEffect(() => {
-    if (animationStage >= 2) {
+    if (animationStage === 2) {
+      setDisplayedName("");
       let index = 0;
       const nameTimer = setInterval(() => {
         if (index <= fullName.length) {
@@ -46,7 +47,8 @@ const Hero = () => {
   
   // Typing animation for description
   useEffect(() => {
-    if (animationStage >= 3) {
+    if (animationStage === 3) {
+      setDisplayedText("");
       let index = 0;
       const textTimer = setInterval(() => {
         if (index <= fullText.length) {
@@ -71,9 +73,9 @@ const Hero = () => {
   return (
     <section id="hero" className="min-h-screen flex items-center justify-center gradient-subtle">
       <div className="container mx-auto px-6">
-        <div className="max-w-6xl mx-auto flex justify-center">
-          <div className="w-full max-w-5xl">
-            <div className="flex flex-col lg:flex-row items-center gap-12">
+        <div className="max-w-6xl mx-auto">
+          <div className="w-full">
+            <div className="flex flex-col lg:flex-row items-center justify-center gap-12">
               {/* Profile Image */}
               <div className={`lg:w-1/3 flex justify-center transition-all duration-1000 ${
                 animationStage >= 1 ? 'lg:justify-start' : 'justify-center'
@@ -133,7 +135,7 @@ const Hero = () => {
                   
                   <Button 
                     variant="outline" 
-                    size="lg"
+                    size="icon"
                     className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
                     onClick={() => window.open("https://linkedin.com/in/ngwledmund", "_blank")}
                     style={{
@@ -141,8 +143,20 @@ const Hero = () => {
                       animation: animationStage >= 4 ? 'scale-in 0.3s ease-out forwards' : 'none'
                     }}
                   >
-                    <Linkedin className="mr-2 h-5 w-5" />
-                    LinkedIn
+                    <Linkedin className="h-5 w-5" />
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    size="icon"
+                    className="border-primary text-primary hover:bg-primary hover:text-primary-foreground transition-smooth"
+                    onClick={() => window.open("https://github.com/edmundnwl", "_blank")}
+                    style={{
+                      animationDelay: '400ms',
+                      animation: animationStage >= 4 ? 'scale-in 0.3s ease-out forwards' : 'none'
+                    }}
+                  >
+                    <Github className="h-5 w-5" />
                   </Button>
                 </div>
                 

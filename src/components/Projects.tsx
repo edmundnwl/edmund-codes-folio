@@ -111,7 +111,7 @@ const Projects = () => {
               >
                 {allItems.map((item, index) => (
                   <div key={index} className="w-full flex-shrink-0">
-                    <Card className="shadow-card border-card-border">
+                    <Card className="shadow-card border-card-border h-[600px] flex flex-col">
                       <CardHeader className="pb-4">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
                           <div className="flex-1">
@@ -136,48 +136,52 @@ const Projects = () => {
                         </p>
                       </CardHeader>
                       
-                      <CardContent>
-                        {item.achievements && (
-                          <ul className="space-y-2 mb-6">
-                            {item.achievements.map((achievement, achievementIndex) => (
-                              <li key={achievementIndex} className="flex items-start">
-                                <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
-                                <span className="text-muted-foreground text-sm leading-relaxed">
-                                  {achievement}
-                                </span>
-                              </li>
-                            ))}
-                          </ul>
-                        )}
-                        
-                        <div className="flex flex-wrap gap-2 mb-4">
-                          {item.skills.map((skill, skillIndex) => (
-                            <Badge 
-                              key={skillIndex}
-                              variant="outline"
-                              className="border-primary text-primary text-xs"
-                            >
-                              {skill}
-                            </Badge>
-                          ))}
+                      <CardContent className="flex-1 flex flex-col justify-between">
+                        <div className="flex-1">
+                          {item.achievements && (
+                            <ul className="space-y-2 mb-6">
+                              {item.achievements.map((achievement, achievementIndex) => (
+                                <li key={achievementIndex} className="flex items-start">
+                                  <div className="w-2 h-2 rounded-full bg-accent mt-2 mr-3 flex-shrink-0" />
+                                  <span className="text-muted-foreground text-sm leading-relaxed">
+                                    {achievement}
+                                  </span>
+                                </li>
+                              ))}
+                            </ul>
+                          )}
                         </div>
                         
-                        {item.links && item.links.length > 0 && (
-                          <div className="flex flex-wrap gap-2">
-                            {item.links.map((link, linkIndex) => (
-                              <Button
-                                key={linkIndex}
+                        <div className="mt-auto">
+                          <div className="flex flex-wrap gap-2 mb-4">
+                            {item.skills.map((skill, skillIndex) => (
+                              <Badge 
+                                key={skillIndex}
                                 variant="outline"
-                                size="sm"
-                                onClick={() => window.open(link.url, "_blank")}
-                                className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
+                                className="border-primary text-primary text-xs"
                               >
-                                <ExternalLink className="h-3 w-3 mr-1" />
-                                {link.label}
-                              </Button>
+                                {skill}
+                              </Badge>
                             ))}
                           </div>
-                        )}
+                          
+                          {item.links && item.links.length > 0 && (
+                            <div className="flex flex-wrap gap-2">
+                              {item.links.map((link, linkIndex) => (
+                                <Button
+                                  key={linkIndex}
+                                  variant="outline"
+                                  size="sm"
+                                  onClick={() => window.open(link.url, "_blank")}
+                                  className="border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-smooth"
+                                >
+                                  <ExternalLink className="h-3 w-3 mr-1" />
+                                  {link.label}
+                                </Button>
+                              ))}
+                            </div>
+                          )}
+                        </div>
                       </CardContent>
                     </Card>
                   </div>
