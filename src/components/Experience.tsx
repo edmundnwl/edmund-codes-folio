@@ -6,7 +6,7 @@ const Experience = () => {
   const experiences = [
     {
       title: "Ops COO Intern – Data Excellence",
-      company: "DBS Bank Singapore",
+      company: "DBS Bank",
       location: "Singapore",
       period: "May 2025 - Aug 2025",
       achievements: [
@@ -19,7 +19,7 @@ const Experience = () => {
     },
     {
       title: "Business Analyst Intern – Cloud Business Office",
-      company: "Synapxe Singapore",
+      company: "Synapxe",
       location: "Singapore", 
       period: "May 2024 - Oct 2024",
       achievements: [
