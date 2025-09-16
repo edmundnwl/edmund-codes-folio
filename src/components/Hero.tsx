@@ -25,10 +25,8 @@ const Hero = () => {
           <div className="w-full">
             <div className="flex flex-col lg:flex-row items-center justify-center gap-3 lg:gap-12">
               {/* Profile Image */}
-              <div className={`flex justify-center transition-all duration-1000 ease-out ${
-                animationStage >= 1 ? 'lg:justify-start' : 'justify-center'
-              }`}>
-                <div className="mt-0 lg:mt-0 w-3/5 aspect-square min-w-[96px] min-h-[96px] max-w-[320px] max-h-[320px] lg:w-80 lg:h-80 rounded-full bg-muted/50 flex items-center justify-center shadow-elevated overflow-hidden">
+              <div className={"flex justify-center"}>
+                <div className="size-36 lg:size-80 rounded-full bg-muted/50 flex items-center justify-center shadow-elevated overflow-hidden">
                   <img
                     src="/PFP.jpg"
                     alt="Edmund Ng"
@@ -36,6 +34,18 @@ const Hero = () => {
                   />
                 </div>
               </div>
+
+              {/* <div className="flex justify-center">
+                <div className="flex-none w-[144px] h-[144px] lg:w-[320px] lg:h-[320px] rounded-full bg-muted/50 shadow-elevated overflow-hidden">
+                  <img
+                    src="/PFP.jpg"
+                    alt="Edmund Ng"
+                    width="320" height="320"           
+                    className="block w-full h-full object-cover" 
+                    loading="eager" decoding="async"
+                  />
+                </div>
+              </div> */}
               
               {/* Content */}
               <div className={`flex flex-col items-center text-center lg:items-start lg:text-left transition-all duration-1000 ease-out ${
