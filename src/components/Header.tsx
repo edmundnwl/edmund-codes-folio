@@ -84,8 +84,8 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <nav className="md:hidden mt-4 py-4 border-t border-card-border">
-            <div className="flex flex-col space-y-3">
+          <nav className="md:hidden py-4 border-t border-card-border">
+            <div className="flex flex-col">
               {navItems.map((item) => (
                 <button
                   key={item.id}
