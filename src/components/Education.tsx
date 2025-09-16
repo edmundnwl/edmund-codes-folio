@@ -41,7 +41,7 @@ const Education = () => {
     <section id="education" className="py-10">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl lg:text-4xl font-bold text-center mb-4 lg:mb-10 text-primary">
+          <h2 className="text-2xl lg:text-4xl font-bold text-center mb-4 mt-10 lg:mb-10 text-primary">
             Education
           </h2>
           

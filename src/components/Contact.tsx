@@ -1,6 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Mail, Linkedin, Phone, MapPin } from "lucide-react";
+import { Mail, Linkedin, Phone, MapPin, Github } from "lucide-react";
 
 const Contact = () => {
   const contactInfo = [
@@ -19,10 +19,10 @@ const Contact = () => {
       color: "text-accent"
     },
     {
-      icon: MapPin,
-      label: "Location",
-      value: "Singapore",
-      action: null,
+      icon: Github,
+      label: "Github",
+      value: "github.com/edmundnwl",
+      action: () => window.open("https://github.com/edmundnwl", "_blank"),
       color: "text-muted-foreground"
     }
   ];
@@ -47,7 +47,7 @@ const Contact = () => {
                   onClick={contact.action || undefined}
                 >
                   <CardContent className="p-1 lg:p-6 text-center">
-                    <div className={`w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto lg:mb-4 ${contact.color}`}>
+                    <div className={`w-12 h-12 rounded-full lg:bg-muted flex items-center justify-center mx-auto lg:mb-4 ${contact.color}`}>
                       <IconComponent className="h-6 w-6" />
                     </div>
                     

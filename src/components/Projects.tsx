@@ -63,7 +63,7 @@ const Projects = () => {
       role: "Developer",
       period: "May 2023",
       type: "Hackathon Project",
-      description: "Social platform for the office.",
+      description: "Social networking platform for the workplace.",
       achievements: [
         "Winner of Best Plot Twist Award for enhancing awareness of phishing risks through a scam advertisement feature, temporarily disabling users' accounts upon interaction.",
         "Worked in a team of 4 to develop a company-specific social networking platform using Python Flask and SQLite, allowing employees to connect and interact within a secure environment."
@@ -105,7 +105,7 @@ const Projects = () => {
     <section id="projects" className="py-10 bg-muted/30">
       <div className="container mx-auto px-1 lg:px-3">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-2xl lg:text-4xl font-bold text-center mb-4 lg:mb-10 text-primary">
+          <h2 className="text-2xl lg:text-4xl font-bold text-center mb-4 mt-10 lg:mb-10 text-primary">
             Projects & Leadership
           </h2>
           
@@ -144,7 +144,7 @@ const Projects = () => {
               >
                 {allItems.map((item, index) => (
                   <div key={index} className="w-full flex-shrink-0">
-                    <Card className="shadow-card border-card-border min-h-[400px] flex flex-col">
+                    <Card className="shadow-card border-card-border min-h-[350px] lg:min-h-[400px] flex flex-col">
                       <CardHeader className="pb-4">
                         <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 lg:gap-4">
                         {/* <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 lg:gap-4"> */}
@@ -159,13 +159,13 @@ const Projects = () => {
                             </div>
                           </div>
                           
-                          <div className="flex items-center text-sm text-muted-foreground">
+                          <div className="flex items-center text-xs lg:text-sm text-muted-foreground">
                             <Calendar className="h-4 w-4 mr-1" />
                             {item.period}
                           </div>
                         </div>
                         
-                        <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
+                        <p className="text-xs lg:text-base text-muted-foreground leading-relaxed text-justify">
                           {item.description}
                         </p>
                       </CardHeader>
@@ -187,7 +187,7 @@ const Projects = () => {
                         </div>
                         
                         <div className="mt-auto">
-                          <div className="hidden lg:block flex flex-wrap gap-2 mb-2">
+                          <div className="hidden lg:flex flex-wrap gap-2 mb-2">
                             {item.skills.map((skill, skillIndex) => (
                               <Badge 
                                 key={skillIndex}
@@ -224,7 +224,7 @@ const Projects = () => {
             </div>
             
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-1 lg:mt-6 space-x-2">
+            <div className="flex justify-center mt-3 lg:mt-6 space-x-2">
               {allItems.map((_, index) => (
                 <button
                   key={index}

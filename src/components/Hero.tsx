@@ -28,7 +28,7 @@ const Hero = () => {
               <div className={`flex justify-center transition-all duration-1000 ease-out ${
                 animationStage >= 1 ? 'lg:justify-start' : 'justify-center'
               }`}>
-                <div className="mt-20 lg:mt-0 w-3/5 aspect-square min-w-[96px] min-h-[96px] max-w-[320px] max-h-[320px] lg:w-80 lg:h-80 rounded-full bg-muted/50 flex items-center justify-center shadow-elevated overflow-hidden">
+                <div className="mt-0 lg:mt-0 w-3/5 aspect-square min-w-[96px] min-h-[96px] max-w-[320px] max-h-[320px] lg:w-80 lg:h-80 rounded-full bg-muted/50 flex items-center justify-center shadow-elevated overflow-hidden">
                   <img
                     src="/PFP.jpg"
                     alt="Edmund Ng"
@@ -47,7 +47,7 @@ const Hero = () => {
                 <p className="text-lg md:text-2xl text-muted-foreground mb-3 lg:mb-4">
                   Hi, I'm a Business Analyst!
                 </p>
-                <div className="flex flex-wrap gap-2 mb-3 justify-center lg:justify-start">
+                <div className="flex flex-wrap gap-2 mb-3 justify-center lg:justify-start px-6 lg:px-0">
                   {["Python", "VBA", "SQL", "Power BI", "Data Governance"].map((skill, index) => (
                     <Badge 
                       key={index} 
