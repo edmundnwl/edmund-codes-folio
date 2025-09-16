@@ -102,10 +102,10 @@ const Projects = () => {
   const currentItem = allItems[currentProject];
 
   return (
-    <section id="projects" className="py-20 bg-muted/30">
-      <div className="container mx-auto px-6">
+    <section id="projects" className="py-10 bg-muted/30">
+      <div className="container mx-auto px-1 lg:px-3">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-center mb-16 text-primary">
+          <h2 className="text-2xl lg:text-4xl font-bold text-center mb-4 lg:mb-10 text-primary">
             Projects & Leadership
           </h2>
           
@@ -146,13 +146,14 @@ const Projects = () => {
                   <div key={index} className="w-full flex-shrink-0">
                     <Card className="shadow-card border-card-border min-h-[400px] flex flex-col">
                       <CardHeader className="pb-4">
-                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                        <div className="flex flex-col md:flex-row md:items-start md:justify-between gap-2 lg:gap-4">
+                        {/* <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3 lg:gap-4"> */}
                           <div className="flex-1">
-                            <h3 className="text-xl font-semibold text-primary mb-2">
+                            <h3 className="text-lg lg:text-xl font-semibold text-primary mb-2">
                               {item.title}
                             </h3>
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-2">
-                              <span className="text-sm text-muted-foreground">
+                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 mb-1 lg:mb-2">
+                              <span className="text-xs lg:text-sm text-muted-foreground">
                                 {item.role} • {item.type}
                               </span>
                             </div>
@@ -164,13 +165,13 @@ const Projects = () => {
                           </div>
                         </div>
                         
-                        <p className="text-muted-foreground leading-relaxed">
+                        <p className="text-sm lg:text-base text-muted-foreground leading-relaxed">
                           {item.description}
                         </p>
                       </CardHeader>
                       
                       <CardContent className="flex-1 flex flex-col justify-between">
-                        <div className="flex-1">
+                        <div className="hidden lg:block flex-1">
                           {item.achievements && (
                             <ul className="space-y-2 mb-6">
                               {item.achievements.map((achievement, achievementIndex) => (
@@ -186,7 +187,7 @@ const Projects = () => {
                         </div>
                         
                         <div className="mt-auto">
-                          <div className="flex flex-wrap gap-2 mb-4">
+                          <div className="hidden lg:block flex flex-wrap gap-2 mb-2">
                             {item.skills.map((skill, skillIndex) => (
                               <Badge 
                                 key={skillIndex}
@@ -223,7 +224,7 @@ const Projects = () => {
             </div>
             
             {/* Dots Indicator */}
-            <div className="flex justify-center mt-6 space-x-2">
+            <div className="flex justify-center mt-1 lg:mt-6 space-x-2">
               {allItems.map((_, index) => (
                 <button
                   key={index}

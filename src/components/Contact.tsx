@@ -28,14 +28,14 @@ const Contact = () => {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-muted/30">
+    <section id="contact" className="py-10 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-6 text-primary">
+          <h2 className="text-2xl lg:text-4xl font-bold mb-4 lg:mb-10 text-primary">
             Let's Connect
           </h2>
           
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+          <div className="flex flex-wrap justify-center gap-2 lg:gap-6 mb-4 lg:mb-12 lg:grid lg:grid-cols-3 lg:gap-6 lg:justify-between">
             {contactInfo.map((contact, index) => {
               const IconComponent = contact.icon;
               return (
@@ -46,16 +46,16 @@ const Contact = () => {
                   }`}
                   onClick={contact.action || undefined}
                 >
-                  <CardContent className="p-6 text-center">
-                    <div className={`w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto mb-4 ${contact.color}`}>
+                  <CardContent className="p-1 lg:p-6 text-center">
+                    <div className={`w-12 h-12 rounded-full bg-muted flex items-center justify-center mx-auto lg:mb-4 ${contact.color}`}>
                       <IconComponent className="h-6 w-6" />
                     </div>
                     
-                    <h3 className="font-medium text-foreground mb-2">
+                    <h3 className="hidden lg:block font-medium text-foreground mb-2">
                       {contact.label}
                     </h3>
                     
-                    <p className="text-sm text-muted-foreground break-all">
+                    <p className="hidden lg:block text-sm text-muted-foreground break-all">
                       {contact.value}
                     </p>
                   </CardContent>
