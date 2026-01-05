@@ -6,12 +6,12 @@ const Education = () => {
   const education = [
     {
       institution: "National University of Singapore",
-      degree: "Bachelor of Science in Business Analytics (Honors)",
+      degree: "Bachelor of Science in Business Analytics (Honours)",
       period: "Aug 2022 - May 2026",
       location: "Singapore",
-      gpa: "4.82/5.0",
+      gpa: "4.81/5.0",
       honors: [
-        "Dean's List AY23/24 Semester 1 & 2",
+        "3 x Dean's List",
         "Top Student: CS1010S Programming Methodology AY22/23 Semester 1"
       ],
       coursework: [
