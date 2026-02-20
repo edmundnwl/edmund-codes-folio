@@ -5,6 +5,16 @@ import { Calendar, MapPin } from "lucide-react";
 const Experience = () => {
   const experiences = [
     {
+      title: "Product Management Intern",
+      company: "Monee",
+      location: "Singapore",
+      period: "Jan 2026 - Current",
+      achievements: [
+        "Regional Anti-Money Laundering"
+      ],
+      skills: ["Product Management", "Product Design"]
+    },
+    {
       title: "Ops COO Intern – Data Excellence",
       company: "DBS Bank",
       location: "Singapore",
